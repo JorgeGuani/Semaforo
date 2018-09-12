@@ -4,6 +4,7 @@
 #define pinLedRojo 5
 #define pinLedVerdeP 10
 #define pinLedRojoP 11
+#define pinLedIndicadorBoton 9
 #define pot 1
 const int tiempoLedVerde = 5000;
 const int tiempoLedAmarillo = 2500;
@@ -20,6 +21,7 @@ void setup() {
   pinMode(pinLedRojo, OUTPUT);
   pinMode(pinLedVerdeP, OUTPUT);
   pinMode(pinLedRojoP, OUTPUT);
+  pinMode(pinLedIndicadorBoton, OUTPUT);
   Serial.begin(9600);
 }
 
@@ -32,15 +34,18 @@ void loop() {
   }else {
     flag = false;
   }
+
+  if(contador >= (valorPot)) {
+    digitalWrite(pinLedIndicadorBoton, HIGH);
+  }
+  
   if(flag == true) { //semaforo normal
     apagarLeds();
     digitalWrite(pinLedVerde, HIGH);    
     digitalWrite(pinLedRojoP, HIGH);
   }else if(contador >= (valorPot)) {
-    /*Serial.println(millis());
-    Serial.println(contador);
-    Serial.println(valorPot);*/
     contador = 0;
+    digitalWrite(pinLedIndicadorBoton, LOW);
     delay(tiempoParpadeo);    
     digitalWrite(pinLedVerde, LOW);
     delay(tiempoParpadeo);    
