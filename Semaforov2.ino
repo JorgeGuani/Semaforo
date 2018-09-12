@@ -27,7 +27,7 @@ void setup() {
 
 void loop() { 
   contador += 0.157;
-  valorPot = analogRead(pot)*20;
+  valorPot = analogRead(pot)*20 + 2000; //función para calcular el tiempo min y máx
   
   if(digitalRead(pinBoton) == HIGH) {
     flag = true;
